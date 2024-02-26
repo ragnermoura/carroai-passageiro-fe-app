@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Mapa from '../../../assets/images/map.svg'
+import Mapa from "../../../assets/images/map.svg";
 
 import {
   View,
@@ -14,12 +14,12 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const { width, height } = Dimensions.get("window");
 
-
 const WelcomeScreen = ({ navigation }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <TouchableOpacity
+      key={index}
       style={styles.slideButton}
       onPress={() => navigation.navigate(item.screen)}
     >
@@ -35,8 +35,8 @@ const WelcomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-           <ImageBackground
-        source={require('../../../assets/images/map.png')}
+      <ImageBackground
+        source={require("../../../assets/images/map.png")}
         style={styles.backgroundImage}
       >
         <LinearGradient
@@ -49,6 +49,7 @@ const WelcomeScreen = ({ navigation }) => {
         >
           <Text style={styles.welcomeTitle}>Bem-vindo ao Carro Aí</Text>
         </LinearGradient>
+
         <View style={styles.whiteBox}>
           <View style={styles.yellowDivider}></View>
           <Text style={styles.startTitle}>Vamos começar?</Text>
@@ -56,7 +57,7 @@ const WelcomeScreen = ({ navigation }) => {
             Preencha as informações para entrar na sua conta.
           </Text>
 
-          {entries.map((item, index) => (
+          {/* {entries.map((item, index) => (
             <TouchableOpacity
               key={index}
               style={styles.slideButton}
@@ -64,7 +65,15 @@ const WelcomeScreen = ({ navigation }) => {
             >
               <Text style={styles.buttonText}>{item.buttonText}</Text>
             </TouchableOpacity>
-          ))}
+          ))} */}
+
+          <Carousel
+            data={entries}
+            renderItem={renderItem}
+            sliderWidth={width}
+            itemWidth={width - 60} // Você pode ajustar isso conforme necessário
+            onSnapToItem={(index) => setActiveSlide(index)}
+          />
 
           <Pagination
             dotsLength={entries.length}
@@ -74,14 +83,15 @@ const WelcomeScreen = ({ navigation }) => {
             inactiveDotOpacity={0.4}
             inactiveDotScale={0.6}
           />
-          <TouchableOpacity
-            style={styles.signupButton}
-            onPress={() => navigation.navigate("Signup")}
-          >
-            <Text style={styles.signupText}>Ainda não tenho conta</Text>
-          </TouchableOpacity>
+
+          <View style={styles.signupButtonContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+              <Text style={styles.signupText}>Ainda não tenho conta</Text>
+            </TouchableOpacity>
+          </View>
+          
         </View>
-        </ImageBackground>
+      </ImageBackground>
     </View>
   );
 };
@@ -90,15 +100,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   backgroundImage: {
     flex: 1,
     justifyContent: "center",
   },
+
   gradient: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
     paddingBottom: height * 0.4, // Ajuste para que "Bem-vindo ao Carro Aí" fique acima do quadrado branco
   },
+
   whiteBox: {
     position: "absolute",
     left: 0,
@@ -109,13 +122,15 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingHorizontal: 20,
   },
+
   yellowDivider: {
     position: "absolute",
     top: 0,
-    height: 4,
-    backgroundColor: "yellow",
-    width: "100%",
+    height: 20,
+    backgroundColor: "#F8BD00",
+    width: "120%",
   },
+
   welcomeTitle: {
     fontSize: 22,
     fontWeight: "bold",
@@ -123,12 +138,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 5,
   },
+
   startTitle: {
     fontSize: 20,
     fontWeight: "600",
     color: "#2B2B2B",
     alignSelf: "flex-start",
   },
+
   infoText: {
     fontSize: 16,
     fontWeight: "400",
@@ -136,36 +153,51 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginBottom: 20,
   },
+
   slideButton: {
     backgroundColor: "white",
-    borderRadius: 5,
+    borderRadius: 10,
+    height: "57",
     padding: 10,
-    marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
     alignSelf: "stretch",
+    marginRight: 50,
   },
+
   buttonText: {
+    borderRadius: 5,
     color: "#2B2B2B",
     fontSize: 16,
     textAlign: "center",
   },
+
   signupButton: {
     marginTop: 20,
     alignSelf: "center",
   },
-  signupText: {
-    color: "#007bff",
+
+  signupButtonContainer: {
+    marginTop: -30, // Ajuste conforme necessário para mover o botão para cima
+    alignSelf: "stretch", // Isso garante que o container ocupe a largura disponível
   },
+
+  signupText: {
+    color: "#E5AE01",
+    textAlign: "center",
+    marginBottom: 30
+  },
+
   dotStyle: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    marginHorizontal: 8,
-    backgroundColor: "rgba(255, 255, 255, 0.92)",
+    marginHorizontal: 1,
+    backgroundColor: "#2b2b2b",
+    marginBottom: 30
   },
 });
 
