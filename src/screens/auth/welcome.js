@@ -6,8 +6,16 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const { width, height } = Dimensions.get("window");
 
-const WelcomeScreen = ({ navigation }) => {
+const WelcomeScreen = ({ state, navigation }) => {
   const [activeSlide, setActiveSlide] = useState(0);
+
+
+  // Isso aqui é importante colocar
+  const goTo = screenName => {
+    navigation.navigate(screenName);
+  };
+  // ..........
+
 
   const renderItem = ({ item, index }) => (
     <TouchableOpacity
@@ -76,8 +84,13 @@ const WelcomeScreen = ({ navigation }) => {
             inactiveDotScale={0.6}
           />
 
-          <View style={styles.signupButtonContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+          {/* Sempre dê preferencia por colocar assim. Lembra sempre da TAG PAI, nesse caso, a TAG PAI é o <view></view> */}
+
+          {/* Repara que eu coloquei esse goTo que significa Vá para .... Sempre que quiser redirecionar, faça isso! */}
+          <View onPress={() => goTo('Cadastro')} style={styles.signupButtonContainer}>
+
+
+            <TouchableOpacity>
               <Text style={styles.signupText}>Ainda não tenho conta</Text>
             </TouchableOpacity>
 
