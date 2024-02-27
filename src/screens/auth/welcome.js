@@ -7,10 +7,16 @@ import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
+
+
 const WelcomeScreen = ({ state, navigation }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
+  //Coloquei isso aqui
+  const navigation = useNavigation();
 
+
+  //O handleRegister precisa ter o mesmo nome do onpress do button
   const handleRegister = () => {
     navigation.reset({
       routes: [{ name: "Cadastro" }],
@@ -88,10 +94,11 @@ const WelcomeScreen = ({ state, navigation }) => {
           {/* Sempre dê preferencia por colocar assim. Lembra sempre da TAG PAI, nesse caso, a TAG PAI é o <view></view> */}
 
           {/* Repara que eu coloquei esse goTo que significa Vá para .... Sempre que quiser redirecionar, faça isso! */}
-          <View onPress={handleRecovery} style={styles.signupButtonContainer}>
+          <View style={styles.signupButtonContainer}>
+            
+            {/* Senão funcionar aqui mude esse onPress={handleRegister} para a View */}
 
-
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleRegister}>
               <Text style={styles.signupText}>Ainda não tenho conta</Text>
             </TouchableOpacity>
 
