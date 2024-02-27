@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import Mapa from "../../../assets/images/map.svg";
-
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -30,7 +22,7 @@ const WelcomeScreen = ({ navigation }) => {
   const entries = [
     { buttonText: "Entrar com número de telefone", screen: "Phone" },
     { buttonText: "Entrar com email", screen: "Email" },
-    { buttonText: "Entrar com Google", screen: "loginGoogle" },
+    { buttonText: "Entrar com Google", screen: "Google" },
   ];
 
   return (
@@ -85,11 +77,11 @@ const WelcomeScreen = ({ navigation }) => {
           />
 
           <View style={styles.signupButtonContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
               <Text style={styles.signupText}>Ainda não tenho conta</Text>
             </TouchableOpacity>
+
           </View>
-          
         </View>
       </ImageBackground>
     </View>
@@ -188,7 +180,7 @@ const styles = StyleSheet.create({
   signupText: {
     color: "#E5AE01",
     textAlign: "center",
-    marginBottom: 30
+    marginBottom: 30,
   },
 
   dotStyle: {
@@ -197,7 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 1,
     backgroundColor: "#2b2b2b",
-    marginBottom: 30
+    marginBottom: 30,
   },
 });
 
