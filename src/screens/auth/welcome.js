@@ -3,6 +3,7 @@ import Mapa from "../../../assets/images/map.svg";
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -10,11 +11,11 @@ const WelcomeScreen = ({ state, navigation }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
 
-  // Isso aqui é importante colocar
-  const goTo = screenName => {
-    navigation.navigate(screenName);
+  const handleRegister = () => {
+    navigation.reset({
+      routes: [{ name: "Cadastro" }],
+    });
   };
-  // ..........
 
 
   const renderItem = ({ item, index }) => (
@@ -87,7 +88,7 @@ const WelcomeScreen = ({ state, navigation }) => {
           {/* Sempre dê preferencia por colocar assim. Lembra sempre da TAG PAI, nesse caso, a TAG PAI é o <view></view> */}
 
           {/* Repara que eu coloquei esse goTo que significa Vá para .... Sempre que quiser redirecionar, faça isso! */}
-          <View onPress={() => goTo('Cadastro')} style={styles.signupButtonContainer}>
+          <View onPress={handleRecovery} style={styles.signupButtonContainer}>
 
 
             <TouchableOpacity>
