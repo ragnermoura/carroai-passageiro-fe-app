@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const LoginEmailScreen = ({ navigation }) => {
+const LoginEmailScreen = ({}) => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const handleLogin = () => {
-    // Aqui vai a lógica para lidar com o login
-    console.log("Login com", nome, email, senha);
-  };
+  const navigation = useNavigation();
+
 
   const toggleCheckbox = () => {
     setChecked(!checked);
   };
 
+  const handleRecuperacao = () => {
+    navigation.reset({
+      routes: [{ name: "Recuperacao" }],
+    });
+  };
+
   return (
     <View style={styles.container}>
-
       <AntDesign
         name="back"
         size={24}
@@ -57,27 +61,29 @@ const LoginEmailScreen = ({ navigation }) => {
       <View style={styles.termsContainer}>
         <TouchableOpacity
           onPress={toggleCheckbox}
-          style={[styles.checkbox, checked && styles.checked]}>
-        
-        </TouchableOpacity>
+          style={[styles.checkbox, checked && styles.checked]}
+        ></TouchableOpacity>
 
-        <Text style={styles.termsText}>Eu li e aceito os Termos de Uso e as Políticas de Privacidade</Text>
+        <Text style={styles.termsText}>
+          Eu li e aceito os Termos de Uso e as Políticas de Privacidade
+        </Text>
       </View>
 
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-        <Text style={styles.forgotPasswordText}>Esqueci a senha</Text>
-      </TouchableOpacity>
+      <View style={styles.button}>
+        <TouchableOpacity onPress={handleRecuperacao}>
+          <Text style={styles.forgotPasswordText}>Esqueci a senha</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 };
 
-
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     justifyContent: "center",
@@ -97,13 +103,13 @@ const styles = StyleSheet.create({
   text: {
     color: "#fff",
     fontWeight: "bold", // Texto branco pra ficar top no botão azul
-    fontSize: 18
+    fontSize: 18,
   },
 
   backButton: {
-    alignSelf: 'flex-start',
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 40 : 20, // Ajuste para iOS e Android
+    alignSelf: "flex-start",
+    position: "absolute",
+    top: Platform.OS === "ios" ? 40 : 20, // Ajuste para iOS e Android
     left: 10,
   },
 
@@ -136,18 +142,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     bottom: 20,
-    marginRight: 20, 
+    marginRight: 20,
   },
-  
+
   checked: {
     backgroundColor: "#E5AE01",
   },
-  
+
   termsText: {
     fontSize: 14,
     bottom: 40,
     marginLeft: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 
   label: {
@@ -157,7 +163,7 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     marginTop: 15,
     color: "#E5AE01",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 });
 

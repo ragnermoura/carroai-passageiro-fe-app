@@ -7,9 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
-
-
-const WelcomeScreen = ({ state, navigation }) => {
+const WelcomeScreen = ({ }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   //Coloquei isso aqui
