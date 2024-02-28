@@ -9,8 +9,12 @@ const LoginEmailScreen = ({}) => {
   const [senha, setSenha] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const navigation = useNavigation();
+  const handleEmail = () => {
+    // Aqui vai a lógica para lidar com o login
+    console.log('Login com', nome, telefone, senha);
+  };
 
+  const navigation = useNavigation();
 
   const toggleCheckbox = () => {
     setChecked(!checked);
@@ -69,13 +73,13 @@ const LoginEmailScreen = ({}) => {
         </Text>
       </View>
 
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
+      <TouchableOpacity onPress={handleEmail} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
 
-      <View style={styles.button}>
-        <TouchableOpacity onPress={handleRecuperacao}>
-          <Text style={styles.forgotPasswordText}>Esqueci a senha</Text>
+      <View>
+        <TouchableOpacity onPress={handleRecuperacao} style={styles.buttonForgot}>
+          <Text style={styles.forgotText}> Esqueci a senha </Text>
         </TouchableOpacity>
       </View>
 
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
-  forgotPasswordText: {
+  forgotText: {
     marginTop: 15,
     color: "#E5AE01",
     fontWeight: "bold",

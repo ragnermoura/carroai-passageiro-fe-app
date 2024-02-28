@@ -8,7 +8,7 @@ const LoginPhoneScreen = ({ navigation }) => {
   const [senha, setSenha] = useState('');
   const [checked, setChecked] = useState(false);
 
-  const handleLogin = () => {
+  const handlePhone = () => {
     // Aqui vai a lógica para lidar com o login
     console.log('Login com', nome, telefone, senha);
   };
@@ -61,7 +61,7 @@ const LoginPhoneScreen = ({ navigation }) => {
         <Text style={styles.termsText}>Eu li e aceito os Termos de Uso e as Políticas de Privacidade</Text>
       </View>
 
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
+      <TouchableOpacity onPress={handlePhone} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
       

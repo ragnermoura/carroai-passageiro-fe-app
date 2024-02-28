@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Mapa from "../../../assets/images/map.svg";
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { LinearGradient } from "expo-linear-gradient";
@@ -10,9 +9,7 @@ const { width, height } = Dimensions.get("window");
 const WelcomeScreen = ({ }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  //Coloquei isso aqui
   const navigation = useNavigation();
-
 
   //O handleRegister precisa ter o mesmo nome do onpress do button
   const handleRegister = () => {
