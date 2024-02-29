@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const VerificacaoScreen = ({ navigation }) => {
+const VerificacaoScreen = ({ }) => {
   const [codigo, setCodigo] = useState("");
 
-  const handleVerificacao = () => {};
+  const navigation = useNavigation();
+
+  const handleHome = () => { 
+    // aqui será a integração com a api
+    navigation.reset({
+      routes: [{ name: "Home" }],
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -13,25 +21,21 @@ const VerificacaoScreen = ({ navigation }) => {
       <Text style={styles.title}>
         Por favor, verifique o código que enviamos para "+55******8963"
       </Text>
-
-      <Text style={styles.textBody}>
-        236987
-      </Text>
   
       <TextInput
-        placeholder="Email ou número de telefone"
         value={codigo}
         onChangeText={setCodigo}
         style={styles.input}
       />
     
-      <TouchableOpacity onPress={handleVerificacao} style={styles.button}>
+      <TouchableOpacity onPress={handleHome} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
   
   
     </View>
   );
+  
 
 };
 
@@ -50,7 +54,6 @@ const styles = StyleSheet.create ({
       fontWeight: "bold",
       marginTop: 0,
       marginBottom: 100,
-      alignSelf: "flex-start"
     },
   
     textBody: {
@@ -78,7 +81,7 @@ const styles = StyleSheet.create ({
       justifyContent: "center", // Isso centraliza o texto no botão verticalmente
       alignItems: "center", // E isso horizontalmente
       borderRadius: 5, // Bordas arredondadas do botão
-      bottom: 50
+      bottom: 20
     },
   
     text: {

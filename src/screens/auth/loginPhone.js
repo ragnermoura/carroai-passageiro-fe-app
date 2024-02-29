@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const LoginPhoneScreen = ({ navigation }) => {
+const LoginPhoneScreen = ({ }) => {
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
   const [senha, setSenha] = useState('');
   const [checked, setChecked] = useState(false);
 
-  const handlePhone = () => {
-    // Aqui vai a lógica para lidar com o login
-    console.log('Login com', nome, telefone, senha);
+  const navigation = useNavigation();
+
+  const handleValidation = () => { 
+    // aqui será a integração com a api
+    navigation.reset({
+      routes: [{ name: "Home" }],
+    });
   };
 
   const toggleCheckbox = () => {
     setChecked(!checked);
+  };
+
+  const handleRecuperacao = () => {
+    navigation.reset({
+      routes: [{ name: "Recuperacao" }],
+    });
   };
   
   return (
@@ -61,13 +72,17 @@ const LoginPhoneScreen = ({ navigation }) => {
         <Text style={styles.termsText}>Eu li e aceito os Termos de Uso e as Políticas de Privacidade</Text>
       </View>
 
-      <TouchableOpacity onPress={handlePhone} style={styles.button}>
+      <TouchableOpacity onPress={handleValidation} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
       
-      <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-        <Text style={styles.forgotPasswordText}>Esqueci a senha</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity onPress={handleRecuperacao} style={styles.buttonForgot}>
+          <Text style={styles.forgotText}> Esqueci a senha </Text>
+        </TouchableOpacity>
+      </View>
+
+
     </View>
   );
 };
@@ -150,7 +165,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   
-  forgotPasswordText: {
+  forgotText: {
     marginTop: 15,
     color: "#E5AE01",
     fontWeight: "bold"

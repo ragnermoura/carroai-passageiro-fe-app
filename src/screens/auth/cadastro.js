@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const CadastroScreen = ({ navigation }) => {
+const CadastroScreen = ({ }) => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirma, setConfSenha] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const handleCadastro = () => {
-    
-    console.log("Login com", nome, email, senha);
-  };
+  const navigation = useNavigation();
+
+  const handleValidation = () => { 
+    // aqui será a integração com a api
+    navigation.reset({
+      routes: [{ name: "Home" }],
+    });
+  }
 
   const toggleCheckbox = () => {
     setChecked(!checked);
@@ -90,13 +95,14 @@ const CadastroScreen = ({ navigation }) => {
         </Text>
       </View>
 
-      <TouchableOpacity onPress={handleCadastro} style={styles.button}>
+      <TouchableOpacity onPress={handleValidation} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
 
     </View>
   );
-};
+  };
+
 
 const styles = StyleSheet.create({
   

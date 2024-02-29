@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const RecuperacaoScreen = ({ navigation }) => {
+const RecuperacaoScreen = ({ }) => {
   const [usuario, setUsuario] = useState("");
 
-  const handleRecuperacao = () => {};
+  const navigation = useNavigation();
 
+  const handleVerification = () => { 
+    // aqui será a integração com a api
+    navigation.reset({
+      routes: [{ name: "Verificacao" }],
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <AntDesign
-        name="back"
-        size={24}
-        color="black"
-        style={styles.backButton}
+    
+      <AntDesign 
+        name="back" 
+        size={24} 
+        color="black" 
+        style={styles.backButton} 
         onPress={() => navigation.goBack()}
-      />
+        />
   
       <Text style={styles.title}>
         Calma, vamos resolver isso!
@@ -34,7 +42,7 @@ const RecuperacaoScreen = ({ navigation }) => {
       />
 
       
-      <TouchableOpacity onPress={handleRecuperacao} style={styles.button}>
+      <TouchableOpacity onPress={handleVerification} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
   
@@ -107,4 +115,4 @@ const styles = StyleSheet.create ({
 
 
 
-export default RecuperacaoScreen
+export default RecuperacaoScreen;

@@ -3,18 +3,20 @@ import { View, TextInput, Button, Text, TouchableOpacity, StyleSheet, Platform }
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const LoginEmailScreen = ({}) => {
+const LoginEmailScreen = ({ }) => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [checked, setChecked] = useState(false);
 
-  const handleEmail = () => {
-    // Aqui vai a lógica para lidar com o login
-    console.log('Login com', nome, telefone, senha);
-  };
-
   const navigation = useNavigation();
+  
+  const handleValidation = () => { 
+    // aqui será a integração com a api
+    navigation.reset({
+      routes: [{ name: "Home" }],
+    });
+  };
 
   const toggleCheckbox = () => {
     setChecked(!checked);
@@ -68,12 +70,10 @@ const LoginEmailScreen = ({}) => {
           style={[styles.checkbox, checked && styles.checked]}
         ></TouchableOpacity>
 
-        <Text style={styles.termsText}>
-          Eu li e aceito os Termos de Uso e as Políticas de Privacidade
-        </Text>
+        <Text style={styles.termsText}>Eu li e aceito os Termos de Uso e as Políticas de Privacidade</Text>
       </View>
 
-      <TouchableOpacity onPress={handleEmail} style={styles.button}>
+      <TouchableOpacity onPress={handleValidation} style={styles.button}>
         <Text style={styles.text}>Continuar</Text>
       </TouchableOpacity>
 

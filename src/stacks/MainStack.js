@@ -8,7 +8,7 @@ import LoginPhoneScreen from './../screens/auth/loginPhone';
 import CadastroScreen from '../screens/auth/cadastro';
 import RecuperacaoScreen from '../screens/auth/recuperacao';
 import VerificacaoScreen from '../screens/auth/verificacao';
-
+import HomeScreen from '../screens/flow/home';
 const Stack = createStackNavigator();
 
 export default () => (
@@ -20,5 +20,6 @@ export default () => (
     <Stack.Screen name="Cadastro" component={CadastroScreen} options={{ headerShown: false }} />
     <Stack.Screen name="Recuperacao" component={RecuperacaoScreen} options={{ headerShown: false }} />
     <Stack.Screen name="Verificacao" component={VerificacaoScreen} options={{ headerShown: false }} />
+    <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
   </Stack.Navigator>
 );

@@ -1,68 +1,71 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import React, { Component } from "react";
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from '@expo/vector-icons';
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
+import SideMenu from "react-native-side-menu-updated";
+import Menu from './../../components/menu/menu';
 
-const HomeScreen = ({ navigation }) => {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [search, setSearch] = useState("");
-};
+class HomeScreen extends Component {
+  state = {
+    location: null,
+    errorMsg: null,
+    search: "",
+    isMenuOpen: false,
+  };
 
-export default function HomeScreen() {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [search, setSearch] = useState("");
+  async componentDidMount() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      this.setState({ errorMsg: "Permission to access location was denied" });
+      return;
+    }
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
+  toggleMenu = () => {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  };
 
-  return (
-    <View style={styles.container}>
-      {location && (
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        >
-          <Marker coordinate={location.coords} />
-        </MapView>
-      )}
+  render() {
+    const { location, search, isMenuOpen } = this.state;
 
-      <TouchableOpacity style={styles.button}>
-        <Text>Menu Principal</Text>
-      </TouchableOpacity>
+    const menu = <Menu navigator={this.props.navigation} />;
 
-      <View style={styles.footer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Pesquise aqui..."
-          value={search}
-          onChangeText={setSearch}
-        />
-      </View>
-    </View>
-  );
+    return (
+      <SideMenu menu={menu} isOpen={isMenuOpen}>
+        <View style={styles.container}>
+          {location && (
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            >
+              <Marker coordinate={location.coords} />
+            </MapView>
+          )}
+
+          <AntDesign style={styles.menu} name="bars" size={24} color="black" onPress={this.toggleMenu} />
+          
+          <View style={styles.footer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Para onde vamos"
+              value={search}
+              onChangeText={(text) => this.setState({ search: text })}
+            />
+          </View>
+        </View>
+      </SideMenu>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -81,6 +84,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     zIndex: 5,
   },
+
+  menu: {
+    alignSelf: "flex-start",
+      position: "absolute",
+      top: Platform.OS === "ios" ? 40 : 20, // Ajuste para iOS e Android
+      left: 10,
+
+  },
+
   footer: {
     position: "absolute",
     bottom: 20,
@@ -97,3 +109,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+// Seus estilos permanecem os mesmos
+
+export default HomeScreen;
