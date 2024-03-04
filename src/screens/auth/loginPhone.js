@@ -14,7 +14,7 @@ const LoginPhoneScreen = ({ }) => {
   const handleValidation = () => { 
     // aqui será a integração com a api
     navigation.reset({
-      routes: [{ name: "Home" }],
+      routes: [{ name: "Menu" }],
     });
   };
 

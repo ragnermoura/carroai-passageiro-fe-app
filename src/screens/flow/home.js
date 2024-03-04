@@ -11,15 +11,12 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
-import SideMenu from "react-native-side-menu-updated";
-import Menu from "./../../components/menu/index";
 
 class HomeScreen extends Component {
   state = {
     location: null,
     errorMsg: null,
     search: "",
-    isMenuOpen: false,
   };
 
   async componentDidMount() {
@@ -33,18 +30,13 @@ class HomeScreen extends Component {
     this.setState({ location });
   }
 
-  toggleMenu = () => {
-    this.setState({ isMenuOpen: !this.state.isMenuOpen });
-  };
 
   render() {
-    const { location, search, isMenuOpen } = this.state;
-
-    const menu = <Menu navigator={this.props.navigation} />;
+    const { location, search } = this.state;
 
     return (
       <View style={styles.container}>
-        <SideMenu>
+    
         {location && (
           <MapView
             style={styles.map}
@@ -59,14 +51,6 @@ class HomeScreen extends Component {
           </MapView>
         )}
 
-        <AntDesign
-          style={styles.menu}
-          name="bars"
-          size={24}
-          color="black"
-          onPress={this.toggleMenu}
-        />
-
         <View style={styles.footer}>
           <TextInput
             style={styles.input}
@@ -76,7 +60,6 @@ class HomeScreen extends Component {
           />
         </View>
 
-        </SideMenu>
 
         </View>
         
