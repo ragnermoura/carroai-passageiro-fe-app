@@ -13,17 +13,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-      
+      "supportsTablet": true,
+      "bundleIdentifier": "com.joseeduardo00.passAppFE"
     },
     "android": {
-    
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.joseeduardo00.passAppFE"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ba0f52f7-97f7-4a50-9845-6425b002ba7a"
+      }
     }
   }
 }
