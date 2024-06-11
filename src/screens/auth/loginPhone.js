@@ -10,9 +10,13 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
+import IconBrasilFlag from "../../../assets/images/brasilFlag.svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import api from "../../../services/auth/index";
 
 const LoginPhoneScreen = ({}) => {
   const [nome, setNome] = useState("");
+  const [sobrenome, setSobreNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
   const [checked, setChecked] = useState(false);
@@ -21,13 +25,64 @@ const LoginPhoneScreen = ({}) => {
 
   const handleValidation = () => {
     // aqui será a integração com a api
-    if (checked) {
-      navigation.reset({
-        routes: [{ name: "Menu" }],
-      });
+    // alterar essa lógica para se adequar ao backend
+    if (telefone === "" || senha === "" || nome === "" || sobrenome === "") {
+      alert("Erro", "Preencha todos os campos");
     } else {
-      alert("Aceite os termos de uso e as políticas de Privacidade");
-      return;
+      api.phoneLogin(telefone, senha).then((res) => {
+        if (res.status === 200) {
+          const clearStorage = async () => {
+            try {
+              await AsyncStorage.clear();
+            } catch (e) {
+              console.error("Error clearing AsyncStorage", e);
+            }
+          };
+          clearStorage();
+
+          const storeObject = async (key, value) => {
+            try {
+              const jsonValue = JSON.stringify(value);
+              await AsyncStorage.setItem(key, jsonValue);
+            } catch (error) {
+              console.error("Error storing object", error);
+            }
+          };
+          storeObject("token", { token: res.data.token });
+
+          // ver como vai ser o perfil no app
+          // api.getPerfil().then((res) => {
+          //   res.data.response.map((e) => {
+          //     // console.log(e.email, emailField, e.email == emailField);
+          //     if (e.email == email) {
+          //       console.log(e);
+          //       const storeObject = async (key, value) => {
+          //         try {
+          //           const jsonValue = JSON.stringify(value);
+          //           await AsyncStorage.setItem(key, jsonValue);
+          //         } catch (error) {
+          //           console.error("Error storing object", error);
+          //         }
+          //       };
+          //       storeObject("perfil", { perfil: e });
+          //     } else {
+          //       return;
+          //     }
+          //   });
+          // });
+
+          if (checked) {
+            navigation.reset({
+              routes: [{ name: "Menu" }],
+            });
+          } else {
+            alert("Aceite os termos de uso e as políticas de Privacidade");
+            return;
+          }
+        } else {
+          alert("Erro", "Erro ao efetuar login");
+        }
+      });
     }
   };
 
@@ -57,12 +112,20 @@ const LoginPhoneScreen = ({}) => {
       <Text style={styles.title}>Insira os seus dados</Text>
       <View style={styles.inputCard}>
         <Text style={styles.titleInputCard}>Nome</Text>
-        <TextInput
-          placeholder="Nome"
-          value={nome}
-          onChangeText={setNome}
-          style={styles.input}
-        />
+        <View style={styles.boxInput}>
+          <TextInput
+            placeholder="Nome"
+            value={nome}
+            onChangeText={setNome}
+            style={styles.nameInput}
+          />
+          <TextInput
+            placeholder="Sobrenome"
+            value={sobrenome}
+            onChangeText={setSobreNome}
+            style={styles.nameInput}
+          />
+        </View>
       </View>
       <View style={styles.inputCard}>
         <Text style={styles.titleInputCard}>Número</Text>
@@ -70,9 +133,10 @@ const LoginPhoneScreen = ({}) => {
           placeholder="+55 01 23456-7890"
           value={telefone}
           onChangeText={setTelefone}
-          style={styles.input}
+          style={styles.inputPhone}
           keyboardType="phone-pad"
         />
+        <IconBrasilFlag style={styles.iconFlag} />
       </View>
 
       <View style={styles.inputCard}>
@@ -184,6 +248,7 @@ const styles = StyleSheet.create({
   inputCard: {
     width: "100%",
     marginBottom: 20,
+    position: "relative",
   },
 
   titleInputCard: {
@@ -191,6 +256,24 @@ const styles = StyleSheet.create({
     top: -72,
     left: 10,
     fontSize: 14,
+  },
+
+  boxInput: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  nameInput: {
+    width: "48%", // Isso faz com que o input ocupe a largura total do container
+    height: 57, // Altura do input
+    marginBottom: 15, // Espaço entre o input e o botão
+    bottom: 50,
+    borderWidth: 1,
+    borderColor: "#ccc", // Cor da borda do input
+    borderRadius: 10, // Bordas arredondadas
+    paddingHorizontal: 10, // Padding interno do input
+    backgroundColor: "#d9d9d9",
   },
 
   input: {
@@ -203,6 +286,25 @@ const styles = StyleSheet.create({
     borderRadius: 10, // Bordas arredondadas
     paddingHorizontal: 10, // Padding interno do input
     backgroundColor: "#d9d9d9",
+  },
+
+  inputPhone: {
+    width: "100%", // Isso faz com que o input ocupe a largura total do container
+    height: 57, // Altura do input
+    marginBottom: 15, // Espaço entre o input e o botão
+    bottom: 50,
+    borderWidth: 1,
+    borderColor: "#ccc", // Cor da borda do input
+    borderRadius: 10, // Bordas arredondadas
+    paddingHorizontal: 10, // Padding interno do input
+    paddingLeft: 55,
+    backgroundColor: "#d9d9d9",
+  },
+
+  iconFlag: {
+    position: "absolute",
+    top: "-41%",
+    left: "5%",
   },
 
   inputPasswordIcon: {

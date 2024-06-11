@@ -2,13 +2,47 @@
 import React, { useEffect } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Logo from "../../../assets/logo/logo.svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate("Welcome");
-    }, 3000); // 3 segundos de delay
+    const checkToken = async () => {
+      try {
+        const clearStorage = async () => {
+          try {
+            await AsyncStorage.clear();
+          } catch (e) {
+            console.error("Error clearing AsyncStorage", e);
+          }
+        };
+        clearStorage();
+        const token = await AsyncStorage.getItem("token");
+        if (!token) {
+          // navigation.reset({
+          //   routes: [{ name: "MainTab", screen: "OrderInTheRestaurant" }],
+          // });
+          // passar o id do restaurante que recebe por rota ou por async storage para a rota do orderintherestaurant
+
+          // criar a logica de cadastro do perfil junto do registrar e salvar no asyncStorage
+          navigation.navigate("Menu");
+          // navigation.navigate("MainTab", { screen: "OrderInTheRestaurant" });
+        } else {
+          navigation.reset({
+            routes: [{ name: "Menu" }],
+          });
+        }
+      } catch (error) {
+        console.error("Erro ao buscar o token", error);
+      }
+    };
+
+    checkToken();
   }, [navigation]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigation.navigate("Welcome");
+  //   }, 3000); // 3 segundos de delay
+  // }, [navigation]);
 
   return (
     <View style={styles.container}>

@@ -6,18 +6,12 @@ import WelcomeScreen from "./../screens/auth/welcome";
 import LoginEmailScreen from "../screens/auth/loginEmail";
 import LoginPhoneScreen from "./../screens/auth/loginPhone";
 import LoginGoogleScreen from "./../screens/auth/loginGoogle";
-import CadastroEmailScreen from "../screens/auth/cadastroEmail";
 import RecuperacaoScreen from "../screens/auth/recuperacao";
-import VerificacaoPhoneScreen from "../screens/auth/verificacaoPhone";
+import VerificacaoScreen from "../screens/auth/verificacao";
 import Menu from "./menuStack";
-import CadastroPhoneScreen from "../screens/auth/cadastroPhone";
-import VerificacaoEmailScreen from "../screens/auth/verificacaoEmail";
-import RecuperacaoPhoneScreen from "../screens/auth/recuperacaoPhone";
-import RecuperacaoEmailScreen from "../screens/auth/recuperacaoEmail";
-import RecuperacaoSenhaPhoneScreen from "../screens/auth/recuperacaoSenhaPhone";
-import RecuperacaoSenhaEmailScreen from "../screens/auth/recuperacaoSenhaEmail";
-import SenhaAlteardaScreen from "../screens/auth/senhaAlterada";
-import VerificacaoConcluidaScreen from "../screens/auth/verificacaoConcluida";
+import CadastroScreen from "../screens/auth/cadastro";
+import RecuperacaoCodeScreen from "../screens/auth/recuperacaoCode";
+import AlterarSenhaScreen from "../screens/auth/alterarSenha";
 import LoginSenhaGoogleScreen from "../screens/auth/loginSenhaGoogle";
 import LoginOutraContaGoogleScreen from "../screens/auth/loginOutraContaGoogle";
 const Stack = createStackNavigator();
@@ -60,13 +54,8 @@ export default () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="CadastroEmail"
-      component={CadastroEmailScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="CadastroPhone"
-      component={CadastroPhoneScreen}
+      name="Cadastro"
+      component={CadastroScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
@@ -75,45 +64,24 @@ export default () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="VerificacaoPhone"
-      component={VerificacaoPhoneScreen}
+      name="Verificacao"
+      component={VerificacaoScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="VerificacaoEmail"
-      component={VerificacaoEmailScreen}
+      name="RecuperacaoCode"
+      component={RecuperacaoCodeScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="VerificacaoConcluida"
-      component={VerificacaoConcluidaScreen}
+      name="AlterarSenha"
+      component={AlterarSenhaScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="RecuperacaoPhone"
-      component={RecuperacaoPhoneScreen}
+      name="Menu"
+      component={Menu}
       options={{ headerShown: false }}
     />
-    <Stack.Screen
-      name="RecuperacaoEmail"
-      component={RecuperacaoEmailScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="RecuperacaoSenhaPhone"
-      component={RecuperacaoSenhaPhoneScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="RecuperacaoSenhaEmail"
-      component={RecuperacaoSenhaEmailScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="SenhaAlterada"
-      component={SenhaAlteardaScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen name="Menu" component={Menu} />
   </Stack.Navigator>
 );

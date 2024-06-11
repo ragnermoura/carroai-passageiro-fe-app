@@ -10,10 +10,12 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import api from "../../../services/auth/index";
 
 const LoginEmailScreen = ({}) => {
   const [nome, setNome] = useState("");
-  const [Sobrenome, setSobreNome] = useState("");
+  const [sobrenome, setSobreNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [checked, setChecked] = useState(false);
@@ -22,13 +24,64 @@ const LoginEmailScreen = ({}) => {
 
   const handleValidation = () => {
     // aqui será a integração com a api
-    if (checked) {
-      navigation.reset({
-        routes: [{ name: "Menu" }],
-      });
+    // alterar essa lógica para se adequar ao backend
+    if (email === "" || senha === "" || nome === "" || sobrenome === "") {
+      alert("Erro", "Preencha todos os campos");
     } else {
-      alert("Aceite os termos de uso e as políticas de Privacidade");
-      return;
+      api.emailLogin(email, senha).then((res) => {
+        if (res.status === 200) {
+          const clearStorage = async () => {
+            try {
+              await AsyncStorage.clear();
+            } catch (e) {
+              console.error("Error clearing AsyncStorage", e);
+            }
+          };
+          clearStorage();
+
+          const storeObject = async (key, value) => {
+            try {
+              const jsonValue = JSON.stringify(value);
+              await AsyncStorage.setItem(key, jsonValue);
+            } catch (error) {
+              console.error("Error storing object", error);
+            }
+          };
+          storeObject("token", { token: res.data.token });
+
+          // ver como vai ser o perfil no app
+          // api.getPerfil().then((res) => {
+          //   res.data.response.map((e) => {
+          //     // console.log(e.email, emailField, e.email == emailField);
+          //     if (e.email == email) {
+          //       console.log(e);
+          //       const storeObject = async (key, value) => {
+          //         try {
+          //           const jsonValue = JSON.stringify(value);
+          //           await AsyncStorage.setItem(key, jsonValue);
+          //         } catch (error) {
+          //           console.error("Error storing object", error);
+          //         }
+          //       };
+          //       storeObject("perfil", { perfil: e });
+          //     } else {
+          //       return;
+          //     }
+          //   });
+          // });
+
+          if (checked) {
+            navigation.reset({
+              routes: [{ name: "Menu" }],
+            });
+          } else {
+            alert("Aceite os termos de uso e as políticas de Privacidade");
+            return;
+          }
+        } else {
+          alert("Erro", "Erro ao efetuar login");
+        }
+      });
     }
   };
 
@@ -69,7 +122,7 @@ const LoginEmailScreen = ({}) => {
 
           <TextInput
             placeholder="Sobrenome"
-            value={Sobrenome}
+            value={sobrenome}
             onChangeText={setSobreNome}
             style={styles.nameInput}
           />

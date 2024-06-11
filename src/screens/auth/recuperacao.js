@@ -19,8 +19,9 @@ const RecuperacaoScreen = ({}) => {
   const handleVerification = () => {
     // aqui será a integração com a api
     if (usuario.includes("@")) {
-      navigation.navigate("RecuperacaoEmail");
-    } else if (usuario) navigation.navigate("RecuperacaoPhone");
+      navigation.navigate("RecuperacaoCode", { rota: "email" });
+    } else if (usuario)
+      navigation.navigate("RecuperacaoCode", { rota: "phone" });
   };
 
   return (

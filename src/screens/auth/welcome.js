@@ -130,9 +130,7 @@ const WelcomeScreen = ({}) => {
             {/* Senão funcionar aqui mude esse onPress={handleRegister} para a View */}
 
             {/* <TouchableOpacity onPress={handleRegister}> // esse era o caminho que estava antes */}
-            <TouchableOpacity
-              onPress={() => navigation.navigate("CadastroEmail")}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
               <Text style={styles.signupText}>Ainda não tenho conta</Text>
             </TouchableOpacity>
           </View>

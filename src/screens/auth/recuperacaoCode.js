@@ -11,41 +11,89 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-const RecuperacaoEmailScreen = ({}) => {
+const RecuperacaoCodeScreen = ({ route }) => {
+  const { rota } = route.params;
+
   const [codigo, setCodigo] = useState("");
 
   const navigation = useNavigation();
 
   const handlePassword = () => {
     // aqui será a integração com a api
-    navigation.reset({
-      routes: [{ name: "RecuperacaoSenhaEmail" }],
-    });
+    if (rota == "email") {
+      navigation.reset({
+        routes: [{ name: "AlterarSenha", params: { rota: "email" } }],
+      });
+    } else if (rota == "phone") {
+      navigation.reset({
+        routes: [{ name: "AlterarSenha", params: { rota: "phone" } }],
+      });
+    }
   };
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.iconBack}>
-        <Ionicons
-          name="arrow-back-sharp"
-          size={24}
-          color="#2B2B2B"
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
+  if (rota == "email") {
+    return (
+      <View style={styles.container}>
+        <View style={styles.iconBack}>
+          <Ionicons
+            name="arrow-back-sharp"
+            size={24}
+            color="#2B2B2B"
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+        <Text style={styles.title}>
+          Por favor, insira o código que enviamos agora para:{" "}
+        </Text>
+        <Text style={styles.numberTitle}>******gmail.com</Text>
+
+        <TextInput
+          value={codigo}
+          onChangeText={setCodigo}
+          style={styles.input}
         />
+
+        <TouchableOpacity
+          onPress={() => handlePassword()}
+          style={styles.button}
+        >
+          <Text style={styles.text}>Verificar</Text>
+        </TouchableOpacity>
       </View>
-      <Text style={styles.title}>
-        Por favor, insira o código que enviamos agora para:{" "}
-      </Text>
-      <Text style={styles.numberTitle}>******gmail.com</Text>
+    );
+  } else if (rota == "phone") {
+    return (
+      <View style={styles.container}>
+        <View style={styles.iconBack}>
+          <Ionicons
+            name="arrow-back-sharp"
+            size={24}
+            color="#2B2B2B"
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+        <Text style={styles.title}>
+          Por favor, insira o código que enviamos agora para:{" "}
+        </Text>
+        <Text style={styles.numberTitle}>+55 *******7890</Text>
 
-      <TextInput value={codigo} onChangeText={setCodigo} style={styles.input} />
+        <TextInput
+          value={codigo}
+          onChangeText={setCodigo}
+          style={styles.input}
+        />
 
-      <TouchableOpacity onPress={handlePassword} style={styles.button}>
-        <Text style={styles.text}>Verificar</Text>
-      </TouchableOpacity>
-    </View>
-  );
+        <TouchableOpacity
+          onPress={() => handlePassword()}
+          style={styles.button}
+        >
+          <Text style={styles.text}>Verificar</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -123,4 +171,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecuperacaoEmailScreen;
+export default RecuperacaoCodeScreen;
