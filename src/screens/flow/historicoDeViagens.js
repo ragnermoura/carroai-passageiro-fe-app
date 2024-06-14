@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const TravelHistoryScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Hisotrico de Viagens Screen</Text>
     </View>
   );
 };

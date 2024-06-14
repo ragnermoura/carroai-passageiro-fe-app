@@ -12,6 +12,7 @@ import * as Location from "expo-location";
 
 import { useState, useEffect } from "react";
 import MapView, { Marker } from "react-native-maps";
+import SearchCard from "../../components/cards/searchCard/searchCard";
 
 const HomeScreen = () => {
   const [location, setLocation] = useState(null);
@@ -57,12 +58,13 @@ const HomeScreen = () => {
         <Marker coordinate={location.coords} />
       </MapView>
       <View style={styles.footer}>
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           placeholder="Para onde vamos"
           value={search}
           onChangeText={(text) => setSearch(text)}
-        />
+        /> */}
+        <SearchCard />
       </View>
     </View>
   );

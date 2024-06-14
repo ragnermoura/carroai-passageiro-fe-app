@@ -18,14 +18,7 @@ const SplashScreen = ({ navigation }) => {
         clearStorage();
         const token = await AsyncStorage.getItem("token");
         if (!token) {
-          // navigation.reset({
-          //   routes: [{ name: "MainTab", screen: "OrderInTheRestaurant" }],
-          // });
-          // passar o id do restaurante que recebe por rota ou por async storage para a rota do orderintherestaurant
-
-          // criar a logica de cadastro do perfil junto do registrar e salvar no asyncStorage
           navigation.navigate("Menu");
-          // navigation.navigate("MainTab", { screen: "OrderInTheRestaurant" });
         } else {
           navigation.reset({
             routes: [{ name: "Menu" }],

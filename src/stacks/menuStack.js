@@ -48,7 +48,7 @@ export default () => {
       <Drawer.Screen
         name="Home"
         options={{
-          // headerTransparent: true,
+          headerTransparent: true,
           header: () => <HeaderButton />,
           // drawerLabel: "Menu",
           // title: "",
@@ -58,14 +58,15 @@ export default () => {
         }}
         component={Home}
       />
-      <Drawer.Screen name="Carteira" component={PortfolioScreen} />
-      <Drawer.Screen name="Promoções" component={PromotionScreen} />
+      <Drawer.Screen name="Carteira" options={{headerTransparent: true,}} component={PortfolioScreen} />
+      <Drawer.Screen name="Promoções" options={{headerTransparent: true,}} component={PromotionScreen} />
       <Drawer.Screen
         name="Histórico de viagens"
+        options={{headerTransparent: true,}}
         component={TravelHistoryScreen}
       />
-      <Drawer.Screen name="Ajuda" component={HelpScreen} />
-      <Drawer.Screen name="Sobre nós" component={AboutUsScreen} />
+      <Drawer.Screen name="Ajuda" options={{headerTransparent: true,}} component={HelpScreen} />
+      <Drawer.Screen name="Sobre nós" options={{headerTransparent: true,}} component={AboutUsScreen} />
     </Drawer.Navigator>
   );
 };

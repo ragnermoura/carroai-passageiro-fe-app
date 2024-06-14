@@ -14,6 +14,9 @@ import RecuperacaoCodeScreen from "../screens/auth/recuperacaoCode";
 import AlterarSenhaScreen from "../screens/auth/alterarSenha";
 import LoginSenhaGoogleScreen from "../screens/auth/loginSenhaGoogle";
 import LoginOutraContaGoogleScreen from "../screens/auth/loginOutraContaGoogle";
+import SearchScreen from "../screens/flow/search";
+import SelectionScreen from "../screens/flow/selection";
+
 const Stack = createStackNavigator();
 
 export default () => (
@@ -76,6 +79,16 @@ export default () => (
     <Stack.Screen
       name="AlterarSenha"
       component={AlterarSenhaScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SearchScreen"
+      component={SearchScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SelectionScreen"
+      component={SelectionScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen

@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const PromotionScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Promoções Screen</Text>
     </View>
   );
 };

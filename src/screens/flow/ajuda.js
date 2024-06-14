@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const HelpScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Ajuda Screen</Text>
     </View>
   );
 };
