@@ -28,13 +28,14 @@ const VerificacaoScreen = ({ route }) => {
 
   const handleHome = () => {
     // alterar essa lógica para se adequar ao backend
-    api.sendValidationCode(id, codigo).then((res) => {
-      if (res.status === 200) {
-        setVerification(true);
-      } else {
-        alert("Código incorreto!");
-      }
-    });
+    // api.sendValidationCode(id, codigo).then((res) => {
+    //   if (res.status === 200) {
+    //     setVerification(true);
+    //   } else {
+    //     alert("Código incorreto!");
+    //   }
+    // });
+    setVerification(true);
   };
 
   // const getData = async (key) => {

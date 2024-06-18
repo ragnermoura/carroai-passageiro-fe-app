@@ -18,7 +18,10 @@ const SplashScreen = ({ navigation }) => {
         clearStorage();
         const token = await AsyncStorage.getItem("token");
         if (!token) {
-          navigation.navigate("Menu");
+          navigation.reset({
+            routes: [{ name: "SelectionScreen" }],
+          });
+          // navigation.navigate("Menu");
         } else {
           navigation.reset({
             routes: [{ name: "Menu" }],

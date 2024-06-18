@@ -76,17 +76,21 @@ const CadastroScreen = ({}) => {
           });
 
           if (checked) {
-            api.emailRegister(email, senha, nome).then((res) => {
-              // console.log(res.status)
-              if (res.status == 202) {
-                const id_usuario = res.data.usuarioCriado.id_user;
-                setTimeout(() => {
-                  navigation.navigate("Verificacao", {
-                    rota: "email",
-                    id: id_usuario,
-                  });
-                }, 3000);
-              }
+            // api.emailRegister(email, senha, nome).then((res) => {
+            //   // console.log(res.status)
+            //   if (res.status == 202) {
+            //     const id_usuario = res.data.usuarioCriado.id_user;
+            //     setTimeout(() => {
+            //       navigation.navigate("Verificacao", {
+            //         rota: "email",
+            //         id: id_usuario,
+            //       });
+            //     }, 3000);
+            //   }
+            // });
+            navigation.navigate("Verificacao", {
+              rota: "email",
+              // id: id_usuario,
             });
           } else {
             alert("Aceite os termos de uso e as políticas de Privacidade");

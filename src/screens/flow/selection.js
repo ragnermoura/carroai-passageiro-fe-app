@@ -10,11 +10,14 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Entypo } from "@expo/vector-icons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useState, useEffect } from "react";
 import MapView, { Marker } from "react-native-maps";
+import User from "../../../assets/icons/userProfile.svg";
+import UserMax from "../../../assets/icons/userProfileMax.svg";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SelectionScreen = () => {
   const [location, setLocation] = useState(null);
@@ -85,7 +88,7 @@ const SelectionScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.footer}>
+      <ScrollView style={styles.footer}>
         <View style={styles.boxOptionsFooter}>
           <View style={styles.cardOption}>
             <Image source={require("../../../assets/images/carroImg.png")} />
@@ -97,9 +100,115 @@ const SelectionScreen = () => {
             <Image source={require("../../../assets/images/boxImg.png")} />
           </View>
         </View>
-        {/* terminar essa tela */}
-        <View></View>
-      </View>
+
+        <TouchableOpacity style={styles.travelCardOn}>
+          <Image
+            source={require("../../../assets/images/carOption.png")}
+            style={styles.carImg}
+          />
+
+          <View style={styles.cardType}>
+            <Text style={styles.typeTitle}>Basic</Text>
+            <Text style={styles.typeSubTitle}>Mais barato</Text>
+          </View>
+
+          <View style={styles.cardInfo}>
+            <Text style={styles.waitingTime}>2 Min</Text>
+            <View style={styles.capacity}>
+              <User style={styles.iconCapacity} />
+              <Text style={styles.textCapacity}>4</Text>
+            </View>
+          </View>
+
+          <View style={styles.boxValue}>
+            <Text style={styles.value}>R$ 15,50</Text>
+            <Entypo
+              name="chevron-small-right"
+              size={30}
+              style={{ marginBottom: -2 }}
+            />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.travelCardOff}>
+          <Image
+            source={require("../../../assets/images/carOption.png")}
+            style={styles.carImg}
+          />
+
+          <View style={styles.cardType}>
+            <Text style={styles.typeTitle}>Plus</Text>
+            <Text style={styles.typeSubTitle}>Mais conforto</Text>
+          </View>
+
+          <View style={styles.cardInfo}>
+            <Text style={styles.waitingTime}>4 Min</Text>
+            <View style={styles.capacity}>
+              <User style={styles.iconCapacity} />
+              <Text style={styles.textCapacity}>4</Text>
+            </View>
+          </View>
+
+          <View style={styles.boxValue}>
+            <Text style={styles.value}>R$ 24,75</Text>
+            {/* <Entypo
+                  name="chevron-small-right"
+                  size={30}
+                  style={{ marginBottom: -2 }}
+                /> */}
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.travelCardOff}>
+          <Image
+            source={require("../../../assets/images/carOption.png")}
+            style={styles.carImg}
+          />
+
+          <View style={styles.cardType}>
+            <Text style={styles.typeTitle}>Plus</Text>
+            <Text style={styles.typeSubTitle}>Mais conforto</Text>
+          </View>
+
+          <View style={styles.cardInfo}>
+            <Text style={styles.waitingTime}>4 Min</Text>
+            <View style={styles.capacity}>
+              <User style={styles.iconCapacity} />
+              <Text style={styles.textCapacity}>4</Text>
+            </View>
+          </View>
+
+          <View style={styles.boxValue}>
+            <Text style={styles.value}>R$ 24,75</Text>
+            {/* <Entypo
+                  name="chevron-small-right"
+                  size={30}
+                  style={{ marginBottom: -2 }}
+                /> */}
+          </View>
+        </TouchableOpacity>
+
+        <View style={styles.div}></View>
+
+        <TouchableOpacity style={styles.boxPayment}>
+          <View style={styles.boxCard}>
+            <Image source={require("../../../assets/images/flagCard.png")} />
+            <Text style={styles.cardNumber}>8989</Text>
+          </View>
+          <Text style={styles.cardSwitch}>Toque para alterar</Text>
+        </TouchableOpacity>
+
+        <View style={styles.cardButton}>
+          <TouchableOpacity style={styles.buttonAnother}>
+            <UserMax style={styles.iconUser} />
+            <Text style={styles.textAnother}>Outra pessoa</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.buttonRequest}>
+            <Text style={styles.textRequest}>Solicitar</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -182,11 +291,11 @@ const styles = StyleSheet.create({
     zIndex: 100,
     bottom: 0,
     width: "100%",
-    height: "45%",
+    height: "50%",
     backgroundColor: "#fff",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    padding: 10,
+    paddingHorizontal: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.4,
@@ -198,6 +307,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-around",
     marginTop: 20,
+    marginBottom: 15,
   },
   cardOption: {
     width: 95,
@@ -211,6 +321,153 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff",
     borderRadius: 10,
+  },
+  travelCardOn: {
+    width: "99%",
+    alignSelf: "center",
+    flexDirection: "row",
+    paddingHorizontal: 12,
+    paddingVertical: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 16,
+    elevation: 10,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  travelCardOff: {
+    width: "99%",
+    alignSelf: "center",
+    flexDirection: "row",
+    paddingHorizontal: 12,
+    paddingVertical: 15,
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  carImg: {
+    marginRight: 10,
+  },
+  cardType: {
+    marginRight: 15,
+  },
+  typeTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  typeSubTitle: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#000",
+  },
+  cardInfo: {
+    marginRight: 22,
+  },
+  waitingTime: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#2b2b2b",
+    marginBottom: 8,
+  },
+  capacity: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  iconCapacity: {
+    marginRight: 8,
+  },
+  textCapacity: {
+    fontSize: 12,
+    fontWeight: "400",
+    color: "#2b2b2b",
+  },
+  boxValue: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  value: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  div: {
+    width: "100%",
+    backgroundColor: "rgba(151, 151, 151, .3)",
+    height: 1,
+    marginBottom: 16,
+  },
+  boxPayment: {
+    alignSelf: "center",
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 21,
+  },
+  boxCard: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cardNumber: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#2b2b2b",
+    marginLeft: 8,
+  },
+  cardSwitch: {
+    fontSize: 14,
+    fontWeight: "300",
+    color: "#2b2b2b",
+  },
+  cardButton: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginBottom: 20,
+  },
+  buttonAnother: {
+    flexDirection: "row",
+    width: 95,
+    height: 60,
+    borderRadius: 10,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 16,
+    elevation: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 22,
+  },
+  iconUser: {
+    marginRight: 6,
+  },
+  textAnother: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#2b2b2b",
+    width: "60%",
+  },
+  buttonRequest: {
+    width: 213,
+    height: 60,
+    backgroundColor: "#0068c1",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 16,
+    elevation: 10,
+  },
+  textRequest: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fff",
   },
 });
 
