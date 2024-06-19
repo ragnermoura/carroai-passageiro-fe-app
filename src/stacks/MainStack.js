@@ -16,6 +16,10 @@ import LoginSenhaGoogleScreen from "../screens/auth/loginSenhaGoogle";
 import LoginOutraContaGoogleScreen from "../screens/auth/loginOutraContaGoogle";
 import SearchScreen from "../screens/flow/search";
 import SelectionScreen from "../screens/flow/selection";
+import FareDetails from "../screens/flow/fareDetails";
+import LocationConfirmation from "../screens/flow/locationConfirmation";
+import Solicitation from "../screens/flow/solicitation";
+import Expansion from "../screens/flow/expansion";
 
 const Stack = createStackNavigator();
 
@@ -89,6 +93,26 @@ export default () => (
     <Stack.Screen
       name="SelectionScreen"
       component={SelectionScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="FareDetails"
+      component={FareDetails}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="LocationConfirmation"
+      component={LocationConfirmation}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Expansion"
+      component={Expansion}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Solicitation"
+      component={Solicitation}
       options={{ headerShown: false }}
     />
     <Stack.Screen
