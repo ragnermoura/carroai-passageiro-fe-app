@@ -20,6 +20,7 @@ import FareDetails from "../screens/flow/fareDetails";
 import LocationConfirmation from "../screens/flow/locationConfirmation";
 import Solicitation from "../screens/flow/solicitation";
 import Expansion from "../screens/flow/expansion";
+import RaceConfirmation from "../screens/flow/raceConfimation";
 
 const Stack = createStackNavigator();
 
@@ -113,6 +114,11 @@ export default () => (
     <Stack.Screen
       name="Solicitation"
       component={Solicitation}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="RaceConfirmation"
+      component={RaceConfirmation}
       options={{ headerShown: false }}
     />
     <Stack.Screen

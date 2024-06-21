@@ -27,62 +27,70 @@ const LoginPhoneScreen = ({}) => {
     // aqui será a integração com a api
     // alterar essa lógica para se adequar ao backend
     if (telefone === "" || senha === "" || nome === "" || sobrenome === "") {
-      alert("Erro", "Preencha todos os campos");
+      alert("Preencha todos os campos");
     } else {
-      api.phoneLogin(telefone, senha).then((res) => {
-        if (res.status === 200) {
-          const clearStorage = async () => {
-            try {
-              await AsyncStorage.clear();
-            } catch (e) {
-              console.error("Error clearing AsyncStorage", e);
-            }
-          };
-          clearStorage();
+      // api.phoneLogin(telefone, senha).then((res) => {
+      //   if (res.status === 200) {
+      //     const clearStorage = async () => {
+      //       try {
+      //         await AsyncStorage.clear();
+      //       } catch (e) {
+      //         console.error("Error clearing AsyncStorage", e);
+      //       }
+      //     };
+      //     clearStorage();
 
-          const storeObject = async (key, value) => {
-            try {
-              const jsonValue = JSON.stringify(value);
-              await AsyncStorage.setItem(key, jsonValue);
-            } catch (error) {
-              console.error("Error storing object", error);
-            }
-          };
-          storeObject("token", { token: res.data.token });
+      //     const storeObject = async (key, value) => {
+      //       try {
+      //         const jsonValue = JSON.stringify(value);
+      //         await AsyncStorage.setItem(key, jsonValue);
+      //       } catch (error) {
+      //         console.error("Error storing object", error);
+      //       }
+      //     };
+      //     storeObject("token", { token: res.data.token });
 
-          // ver como vai ser o perfil no app
-          // api.getPerfil().then((res) => {
-          //   res.data.response.map((e) => {
-          //     // console.log(e.email, emailField, e.email == emailField);
-          //     if (e.email == email) {
-          //       console.log(e);
-          //       const storeObject = async (key, value) => {
-          //         try {
-          //           const jsonValue = JSON.stringify(value);
-          //           await AsyncStorage.setItem(key, jsonValue);
-          //         } catch (error) {
-          //           console.error("Error storing object", error);
-          //         }
-          //       };
-          //       storeObject("perfil", { perfil: e });
-          //     } else {
-          //       return;
-          //     }
-          //   });
-          // });
+      //     // ver como vai ser o perfil no app
+      //     // api.getPerfil().then((res) => {
+      //     //   res.data.response.map((e) => {
+      //     //     // console.log(e.email, emailField, e.email == emailField);
+      //     //     if (e.email == email) {
+      //     //       console.log(e);
+      //     //       const storeObject = async (key, value) => {
+      //     //         try {
+      //     //           const jsonValue = JSON.stringify(value);
+      //     //           await AsyncStorage.setItem(key, jsonValue);
+      //     //         } catch (error) {
+      //     //           console.error("Error storing object", error);
+      //     //         }
+      //     //       };
+      //     //       storeObject("perfil", { perfil: e });
+      //     //     } else {
+      //     //       return;
+      //     //     }
+      //     //   });
+      //     // });
 
-          if (checked) {
-            navigation.reset({
-              routes: [{ name: "Menu" }],
-            });
-          } else {
-            alert("Aceite os termos de uso e as políticas de Privacidade");
-            return;
-          }
-        } else {
-          alert("Erro", "Erro ao efetuar login");
-        }
-      });
+      //     if (checked) {
+      //       navigation.reset({
+      //         routes: [{ name: "Menu" }],
+      //       });
+      //     } else {
+      //       alert("Aceite os termos de uso e as políticas de Privacidade");
+      //       return;
+      //     }
+      //   } else {
+      //     alert("Erro", "Erro ao efetuar login");
+      //   }
+      // });
+      if (checked) {
+        navigation.reset({
+          routes: [{ name: "Menu" }],
+        });
+      } else {
+        alert("Aceite os termos de uso e as políticas de Privacidade");
+        return;
+      }
     }
   };
 

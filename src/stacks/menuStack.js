@@ -58,15 +58,31 @@ export default () => {
         }}
         component={Home}
       />
-      <Drawer.Screen name="Carteira" options={{headerTransparent: true,}} component={PortfolioScreen} />
-      <Drawer.Screen name="Promoções" options={{headerTransparent: true,}} component={PromotionScreen} />
+      <Drawer.Screen
+        name="Carteira"
+        options={{ headerTransparent: true, headerShown: false }}
+        component={PortfolioScreen}
+      />
+      <Drawer.Screen
+        name="Promoções"
+        options={{ headerTransparent: true, headerShown: false }}
+        component={PromotionScreen}
+      />
       <Drawer.Screen
         name="Histórico de viagens"
-        options={{headerTransparent: true,}}
+        options={{ headerTransparent: true, headerShown: false }}
         component={TravelHistoryScreen}
       />
-      <Drawer.Screen name="Ajuda" options={{headerTransparent: true,}} component={HelpScreen} />
-      <Drawer.Screen name="Sobre nós" options={{headerTransparent: true,}} component={AboutUsScreen} />
+      <Drawer.Screen
+        name="Ajuda"
+        options={{ headerTransparent: true, headerShown: false }}
+        component={HelpScreen}
+      />
+      <Drawer.Screen
+        name="Sobre nós"
+        options={{ headerTransparent: true, headerShown: false }}
+        component={AboutUsScreen}
+      />
     </Drawer.Navigator>
   );
 };

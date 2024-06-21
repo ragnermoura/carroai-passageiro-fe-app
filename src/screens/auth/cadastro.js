@@ -53,7 +53,10 @@ const CadastroScreen = ({}) => {
 
   const handleRegister = (form) => {
     // alterar essa lógica para se adequar ao backend
-    if (email === "" || senha === "" || confirma === "") {
+    if (
+      (telefone === "" || email === "") &&
+      (senha === "" || confirma === "")
+    ) {
       alert("😬 Preencha todos os campos");
     } else if (senha !== confirma) {
       alert("🫣 As palavras-passe não são iguais, tente novamente");
@@ -115,17 +118,21 @@ const CadastroScreen = ({}) => {
         });
 
         if (checked) {
-          api.PhoneRegister(telefone, senha, nome).then((res) => {
-            // console.log(res.status)
-            if (res.status == 202) {
-              const id_usuario = res.data.usuarioCriado.id_user;
-              setTimeout(() => {
-                navigation.navigate("Verificacao", {
-                  rota: "phone",
-                  id: id_usuario,
-                });
-              }, 3000);
-            }
+          // api.PhoneRegister(telefone, senha, nome).then((res) => {
+          //   // console.log(res.status)
+          //   if (res.status == 202) {
+          //     const id_usuario = res.data.usuarioCriado.id_user;
+          //     setTimeout(() => {
+          //       navigation.navigate("Verificacao", {
+          //         rota: "phone",
+          //         id: id_usuario,
+          //       });
+          //     }, 3000);
+          //   }
+          // });
+          navigation.navigate("Verificacao", {
+            rota: "phone",
+            // id: id_usuario,
           });
         } else {
           alert("Aceite os termos de uso e as políticas de Privacidade");

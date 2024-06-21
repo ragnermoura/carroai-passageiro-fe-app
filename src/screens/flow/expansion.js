@@ -9,10 +9,22 @@ import {
 } from "react-native";
 import MapView, { Marker, Circle } from "react-native-maps";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
 const Expansion = () => {
+  const markerCoordinate = { latitude: -2.43849, longitude: -54.6996 };
+  const outerCircleRadius = 600; // Raio do círculo externo
+  const middleCircleRadius = 400; // Raio do círculo do meio
+  const innerCircleRadius = 200; // Raio do círculo interno
+
+  const navigation = useNavigation();
+
+  setTimeout(() => {
+    navigation.navigate("RaceConfirmation");
+  }, 10000);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -25,21 +37,31 @@ const Expansion = () => {
         }}
       >
         <Marker
-          coordinate={{ latitude: -2.43849, longitude: -54.6996 }}
+          coordinate={markerCoordinate}
           title="Av. Mal. Rondon, 2678 - Prainha"
         />
         <Circle
-          center={{ latitude: -2.43849, longitude: -54.6996 }}
-          radius={400}
-          strokeColor="rgba(255, 165, 0, 0.5)"
-          fillColor="rgba(255, 165, 0, 0.2)"
+          center={markerCoordinate}
+          radius={outerCircleRadius}
+          strokeWidth={0}
+          fillColor="rgba(255, 165, 0, 0.1)"
+          zIndex={8}
         />
         <Circle
-          center={{ latitude: -2.43849, longitude: -54.6996 }}
-          radius={200}
-          strokeColor="rgba(255, 165, 0, 0.5)"
-          fillColor="rgba(255, 165, 0, 0.3)"
+          center={markerCoordinate}
+          radius={middleCircleRadius}
+          strokeWidth={0}
+          fillColor="rgba(255, 165, 0, 0.2)"
+          zIndex={9}
         />
+        <Circle
+          center={markerCoordinate}
+          radius={innerCircleRadius}
+          strokeWidth={0}
+          fillColor="rgba(255, 255, 255, 1)"
+          zIndex={10}
+        />
+        {/* colocar uma animaçao para ficar aumentando o raio e diminuindo */}
       </MapView>
       <View style={styles.footer}>
         <View style={styles.cardSolicitation}>
@@ -48,8 +70,10 @@ const Expansion = () => {
             <View style={[styles.bar, styles.barActive]}></View>
             <View style={styles.bar}></View>
           </View>
-          <Text style={styles.titleSol}>Solicitando a sua corrida</Text>
-          <Text style={styles.subTitleSol}>Confirmando seu destino</Text>
+          <Text style={styles.titleSol}>Expandindo raio de busca</Text>
+          <Text style={styles.subTitleSol}>
+            Embarque estimado da corrida: 13:47
+          </Text>
         </View>
 
         <View style={styles.boxPayment}>

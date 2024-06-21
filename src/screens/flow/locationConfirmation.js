@@ -11,7 +11,6 @@ import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import MainButton from "../../components/buttons/mainButton";
 
 const LocationConfirmation = () => {
   const [location, setLocation] = useState(null);

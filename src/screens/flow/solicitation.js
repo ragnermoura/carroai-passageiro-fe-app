@@ -12,7 +12,6 @@ import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import MainButton from "../../components/buttons/mainButton";
 
 const Solicitation = () => {
   const [location, setLocation] = useState(null);
@@ -35,7 +34,7 @@ const Solicitation = () => {
 
   setTimeout(() => {
     navigation.navigate("Expansion");
-  }, 5000);
+  }, 10000);
 
   if (!location) {
     return (
